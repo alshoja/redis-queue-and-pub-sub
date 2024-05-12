@@ -6,8 +6,8 @@ const Queue = require('bull');
 let myQueue;
 const publisher = redis.createClient({
     username: 'default',
-    password: 'AVNS_5Nq43KX2sLCZ2v1Dyvt',
-    host: 'db-redis-blr1-35101-do-user-16484816-0.c.db.ondigitalocean.com',
+    password: '',
+    host: '',
     port: 25061
 });
 myQueue = new Queue('myQueue', { redis: publisher });
