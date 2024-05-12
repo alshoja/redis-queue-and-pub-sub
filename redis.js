@@ -8,10 +8,11 @@ const Queue = require('bull');
 let myQueue;
 const publisher = redis.createClient({
     username: 'default',
-    password: '',
-    host: '',
+    password: process.env.REDIS_PASSWORD,
+    host: process.env.REDIS_HOST,
     port: 25061
 });
+
 myQueue = new Queue('myQueue', { redis: publisher });
 (async () => {
     await publisher.connect();
