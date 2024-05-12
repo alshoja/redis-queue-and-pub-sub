@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const redis = require('redis');
 const Queue = require('bull');
 (async () => {

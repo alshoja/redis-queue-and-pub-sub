@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const http = require('http');
 const redis = require('redis');
 const url = require('url');
