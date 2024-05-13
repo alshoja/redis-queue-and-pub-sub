@@ -5,7 +5,7 @@
   "main": "redis.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node redis.js && node server.js"
+    "start": "node publisher.js && node consumer.js"
   },
   "author": "",
   "license": "ISC",

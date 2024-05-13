@@ -6,10 +6,12 @@ const Queue = require('bull');
 
   let myQueue;
   const client = redis.createClient({
-    username: 'default',
+    username: process.env.REDIS_USERNAME,
     password: process.env.REDIS_PASSWORD,
-    host: process.env.REDIS_HOST,
-    port: 25061
+    socket: {
+      host: process.env.REDIS_HOST,
+      port: process.env.REDIS_PORT
+    }
   });
 
   myQueue = new Queue('myQueue', { redis: client });
@@ -20,9 +22,7 @@ const Queue = require('bull');
 
   await subscriber.subscribe('article', (message) => {
     const d = JSON.parse(message);
-    console.log("🚀 ~ awaitsubscriber.subscribe ~ d:", d);
     const startTime = Date.now();
-    console.log("🚀 ~ awaitsubscriber.subscribe ~ startTime:", startTime)
     const latency = startTime - new Date(d.time);
     console.log('Latency:', latency, 'ms');
   });

@@ -6,22 +6,20 @@ const url = require('url');
 const Queue = require('bull');
 
 let myQueue;
-const publisher = redis.createClient({
-    username: 'default',
+let publisher = redis.createClient({
+    username: process.env.REDIS_USERNAME,
     password: process.env.REDIS_PASSWORD,
-    host: process.env.REDIS_HOST,
-    port: 25061
+    socket: {
+        host: process.env.REDIS_HOST,
+        port: process.env.REDIS_PORT
+    }
 });
 
 myQueue = new Queue('myQueue', { redis: publisher });
 (async () => {
-    await publisher.connect();
-
+    await publisher.connect({ redis: publisher });
 })();
 
-
-
-// Create Server 1
 const server = http.createServer(async (req, res) => {
     const parsedUrl = url.parse(req.url, true);
 
